@@ -1,0 +1,30 @@
+body {
+  font-family: "Inter", sans-serif;
+  margin: 40px;
+}
+.song-header {
+  display: flex;
+}
+
+.song-text>h1, .song-text>h2 {
+  margin: 5px 0px;
+}
+
+.song-text {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#song-title {
+  font-weight: bold;
+  font-size: 35px;
+}
+#album-title {
+  font-size: 20px;
+}
+
+img {
+  width: 220px;
+  border-radius: 8px;
+}
