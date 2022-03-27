@@ -1,18 +1,38 @@
 <html>
   <head>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <script src="color-thief.js" defer></script>
+    <script src="script.js" defer></script>
   </head>
   <body>
     <!-- <h1>Spotistics</h1> -->
     <div class="song-header">
-      <img src="https://i.scdn.co/image/ab67616d0000b273318443aab3531a0558e79a4d" alt="">
+      <img src="https://i.scdn.co/image/ab67616d0000b273318443aab3531a0558e79a4d" alt="" id="album-art" crossorigin="anonymous">
       <div class="song-text">
         <h2 id="album-title">Album Title</h2>
         <h1 id="song-title">Song Title</h1>
         <h2 id="artist-name">By Artist Name</h2>
       </div>
     </div>
-    <div></div>
+    <div class="stats">
+      <div class="stat">
+        <p>Danceability</p>
+        <div class="progressBar" width="200px">
+          <div id="danceability-stat"></div>
+        </div>
+      </div>
+      <div class="stat">
+        <p>Energy</p>
+        <div class="progressBar" width="200px">
+          <div id="energy-stat"></div>
+        </div>
+      </div>
+      <div class="stat">
+        <p>Speechiness</p>
+        <div class="progressBar" width="200px">
+          <div id="speechiness-stat"></div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

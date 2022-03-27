@@ -2,7 +2,38 @@ const fetch = require('node-fetch');
 const configData = require("./config.json");
 const CLIENT_ID = configData.clientId;
 const CLIENT_SECRET = configData.clientSecret;
-const TOKEN = configData.testToken;
+// const TOKEN = configData.testToken;
+let TOKEN = false
+let prevTokenTimestamp = 0
+
+
+const express = require("express")
+const app = express()
+
+app.use(express.static("static"))
+
+// Refresh the token automatically!
+app.use((req, res, next)=>{
+  refreshTokenIfNecessary()
+    .then(()=>next())
+})
+
+async function refreshTokenIfNecessary() {
+  if (Date.now() - prevTokenTimestamp > 3550) {
+    return refreshToken()
+  } else {
+    return false
+  }
+}
+
+async function refreshToken() {
+  TOKEN = await getSpotifyToken(CLIENT_ID, CLIENT_SECRET)
+  prevTokenTimestamp = Date.now()
+  console.log("Token Refreshed at", Date.now())
+  return true
+}
+
+
 
 async function getSpotifyToken(id, secret) {
   return fetch("https://accounts.spotify.com/api/token", {
@@ -23,7 +54,7 @@ async function init() {
 
 // init()
 
-const taylor = "06HL4z0CvFAxyc27GXpf02"
+// const taylor = "06HL4z0CvFAxyc27GXpf02"
 // fetch(`https://api.spotify.com/v1/artists/${taylor}`, {
 //   method:"GET", 
 //   headers:{
@@ -42,19 +73,19 @@ const taylor = "06HL4z0CvFAxyc27GXpf02"
 //   }
 // })
 // .then(res=>res.json())
+// .then(data=>console.log(JSON.stringify(data)))
+
+// const song="4IRpbTrTCHkP3aeRO48tZs"
+
+// fetch(`https://api.spotify.com/v1/tracks/${song}`, {
+//   method:"GET", 
+//   headers:{
+//     'Content-Type': 'application/json',
+//     'Authorization': 'Bearer ' + TOKEN
+//   }
+// })
+// .then(res=>res.json())
 // .then(data=>console.log(JSON.stringify(data, null, 4)))
-
-const song="5enxwA8aAbwZbf5qCHORXi"
-
-fetch(`https://api.spotify.com/v1/tracks/${song}`, {
-  method:"GET", 
-  headers:{
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer ' + TOKEN
-  }
-})
-.then(res=>res.json())
-.then(data=>console.log(JSON.stringify(data, null, 4)))
 
 
 // fetch(`https://api.spotify.com/v1/audio-features/${song}`, {
