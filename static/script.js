@@ -1,3 +1,7 @@
+const THIEF = new ColorThief()
+
+const KEYS = ["C", "C♯ or D♭", "D", "D♯ or E♭", "E", "F", "F♯ or G♭", "G", "G♯ or A♭", "A", "A♯ or B♭", "B"]
+
 const songAudioData = {
   "danceability": 0.631,
   "energy": 0.518,
@@ -19,193 +23,72 @@ const songAudioData = {
   "time_signature": 4
 }
 
-const songInfo = {
-  "album": {
-      "album_type": "album",
-      "artists": [
-          {
-              "external_urls": {
-                  "spotify": "https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"
-              },
-              "href": "https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02",
-              "id": "06HL4z0CvFAxyc27GXpf02",
-              "name": "Taylor Swift",
-              "type": "artist",
-              "uri": "spotify:artist:06HL4z0CvFAxyc27GXpf02"
-          }
-      ],
-      "available_markets": [],
-      "external_urls": {
-          "spotify": "https://open.spotify.com/album/6kZ42qRrzov54LcAk4onW9"
-      },
-      "href": "https://api.spotify.com/v1/albums/6kZ42qRrzov54LcAk4onW9",
-      "id": "6kZ42qRrzov54LcAk4onW9",
-      "images": [
-          {
-              "height": 640,
-              "url": "https://i.scdn.co/image/ab67616d0000b273318443aab3531a0558e79a4d",
-              "width": 640
-          },
-          {
-              "height": 300,
-              "url": "https://i.scdn.co/image/ab67616d00001e02318443aab3531a0558e79a4d",
-              "width": 300
-          },
-          {
-              "height": 64,
-              "url": "https://i.scdn.co/image/ab67616d00004851318443aab3531a0558e79a4d",
-              "width": 64
-          }
-      ],
-      "name": "Red (Taylor's Version)",
-      "release_date": "2021-11-12",
-      "release_date_precision": "day",
-      "total_tracks": 30,
-      "type": "album",
-      "uri": "spotify:album:6kZ42qRrzov54LcAk4onW9"
-  },
-  "artists": [
-      {
-          "external_urls": {
-              "spotify": "https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"
-          },
-          "href": "https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02",
-          "id": "06HL4z0CvFAxyc27GXpf02",
-          "name": "Taylor Swift",
-          "type": "artist",
-          "uri": "spotify:artist:06HL4z0CvFAxyc27GXpf02"
-      }
-  ],
-  "available_markets": [],
-  "disc_number": 1,
-  "duration_ms": 613026,
-  "explicit": true,
-  "external_ids": {
-      "isrc": "USUG12103690"
-  },
-  "external_urls": {
-      "spotify": "https://open.spotify.com/track/5enxwA8aAbwZbf5qCHORXi"
-  },
-  "href": "https://api.spotify.com/v1/tracks/5enxwA8aAbwZbf5qCHORXi",
-  "id": "5enxwA8aAbwZbf5qCHORXi",
-  "is_local": false,
-  "name": "All Too Well (10 Minute Version) (Taylor's Version) (From The Vault)",
-  "popularity": 90,
-  "preview_url": null,
-  "track_number": 30,
-  "type": "track",
-  "uri": "spotify:track:5enxwA8aAbwZbf5qCHORXi"
+function clearStats() {
+  while (STATS.children.length > 0) {
+    STATS.firstChild.remove()
+  }
 }
 
-const pyreInfo = {
-  "album": {
-      "album_type": "album",
-      "artists": [
-          {
-              "external_urls": {
-                  "spotify": "https://open.spotify.com/artist/0ZMWrgLff357yxLyEU77a1"
-              },
-              "href": "https://api.spotify.com/v1/artists/0ZMWrgLff357yxLyEU77a1",
-              "id": "0ZMWrgLff357yxLyEU77a1",
-              "name": "Darren Korb",
-              "type": "artist",
-              "uri": "spotify:artist:0ZMWrgLff357yxLyEU77a1"
-          }
-      ],
-      "available_markets": [],
-      "external_urls": {
-          "spotify": "https://open.spotify.com/album/6Q55ods6yVhg1035RgH2kU"
-      },
-      "href": "https://api.spotify.com/v1/albums/6Q55ods6yVhg1035RgH2kU",
-      "id": "6Q55ods6yVhg1035RgH2kU",
-      "images": [
-          {
-              "height": 640,
-              "url": "https://i.scdn.co/image/ab67616d0000b273335e628ccdf95c5a4c5a4053",
-              "width": 640
-          },
-          {
-              "height": 300,
-              "url": "https://i.scdn.co/image/ab67616d00001e02335e628ccdf95c5a4c5a4053",
-              "width": 300
-          },
-          {
-              "height": 64,
-              "url": "https://i.scdn.co/image/ab67616d00004851335e628ccdf95c5a4c5a4053",
-              "width": 64
-          }
-      ],
-      "name": "Pyre (Original Soundtrack)",
-      "release_date": "2017-07-25",
-      "release_date_precision": "day",
-      "total_tracks": 39,
-      "type": "album",
-      "uri": "spotify:album:6Q55ods6yVhg1035RgH2kU"
-  },
-  "artists": [
-      {
-          "external_urls": {
-              "spotify": "https://open.spotify.com/artist/0ZMWrgLff357yxLyEU77a1"
-          },
-          "href": "https://api.spotify.com/v1/artists/0ZMWrgLff357yxLyEU77a1",
-          "id": "0ZMWrgLff357yxLyEU77a1",
-          "name": "Darren Korb",
-          "type": "artist",
-          "uri": "spotify:artist:0ZMWrgLff357yxLyEU77a1"
-      },
-      {
-          "external_urls": {
-              "spotify": "https://open.spotify.com/artist/5x5ymm4vyLlpwWOXmOJ7zg"
-          },
-          "href": "https://api.spotify.com/v1/artists/5x5ymm4vyLlpwWOXmOJ7zg",
-          "id": "5x5ymm4vyLlpwWOXmOJ7zg",
-          "name": "Ashley Barrett",
-          "type": "artist",
-          "uri": "spotify:artist:5x5ymm4vyLlpwWOXmOJ7zg"
-      }
-  ],
-  "available_markets": [],
-  "disc_number": 1,
-  "duration_ms": 189543,
-  "explicit": false,
-  "external_ids": {
-      "isrc": "TCADE1746624"
-  },
-  "external_urls": {
-      "spotify": "https://open.spotify.com/track/4IRpbTrTCHkP3aeRO48tZs"
-  },
-  "href": "https://api.spotify.com/v1/tracks/4IRpbTrTCHkP3aeRO48tZs",
-  "id": "4IRpbTrTCHkP3aeRO48tZs",
-  "is_local": false,
-  "name": "In the Flame (feat. Ashley Barrett)",
-  "popularity": 37,
-  "preview_url": "https://p.scdn.co/mp3-preview/69692f7bbd07fc5b055fb4253b064f157036ad0b?cid=742fe7261a8148dcb2b2588ce2dee426",
-  "track_number": 1,
-  "type": "track",
-  "uri": "spotify:track:4IRpbTrTCHkP3aeRO48tZs"
+function mapPercentages(percent, ...args) {
+  if (percent >= 1) return args[args.length - 1]
+  return args[Math.floor(percent * args.length)]
 }
 
-const pyreAudioInfo = {
-  "danceability": 0.26,
-  "energy": 0.765,
-  "key": 4,
-  "loudness": -4.926,
-  "mode": 0,
-  "speechiness": 0.0559,
-  "acousticness": 0.356,
-  "instrumentalness": 0,
-  "liveness": 0.107,
-  "valence": 0.238,
-  "tempo": 81.646,
-  "type": "audio_features",
-  "id": "4IRpbTrTCHkP3aeRO48tZs",
-  "uri": "spotify:track:4IRpbTrTCHkP3aeRO48tZs",
-  "track_href": "https://api.spotify.com/v1/tracks/4IRpbTrTCHkP3aeRO48tZs",
-  "analysis_url": "https://api.spotify.com/v1/audio-analysis/4IRpbTrTCHkP3aeRO48tZs",
-  "duration_ms": 189543,
-  "time_signature": 3
+function createStats(stats, accent) {
+  clearStats()
+  addProgressBar("Danceability", stats.danceability, accent)
+  addProgressBar("Energy", stats.energy, accent)
+  addProgressBar("Speechiness", stats.speechiness, accent)
+  addText("Instrumental?", mapPercentages(stats.instrumentalness, "No", "Probably Not", "Probably", "Yes"))
+  addText("Mode", mapPercentages(stats.mode, "Minor", "Major"))
+  addText("Loudness", Math.round(stats.loudness + 60) + " dB")
+  addText("Key", stats.key == -1 ? "Unknown" : KEYS[stats.key])
+  addText("Live?", mapPercentages(stats.liveness, "No", "Maybe", "Yes"))
+  addText("Tempo", Math.round(stats.tempo) + " BPM")
+  addText("Time Signature", stats.time_signature + "/4")
+  addText("Positivity", mapPercentages(stats.mode, "Negative", "Neutral", "Positive"))
+  addText("Duration", Math.floor(stats.duration_ms / 1000 / 60)+":" + String(Math.floor(stats.duration_ms/1000 % 60)).padStart(2, "0"))
 }
 
+function getBrightness(color) {
+  return (color[0] + color[1] + color[2])/ (3 * 255)
+}
+
+function addProgressBar(name, percent, accent = [255,0,0]) {
+  let background = getBrightness(accent) < 0.5 ? "#eee" : "#111"
+  let cont = document.createElement("div")
+  cont.classList.add("stat")
+  let label = document.createElement("p")
+  label.textContent = name
+  cont.append(label)
+  let progressBarCont = document.createElement("div")
+  progressBarCont.classList.add("progressBar")
+  progressBarCont.style.background = background
+  let bar = document.createElement("div")
+  bar.style.width = percent * 100 + "%"
+  bar.style.background = "rgb("+accent.join(", ")+")"
+  progressBarCont.append(bar)
+  cont.append(progressBarCont)
+  STATS.append(cont)
+}
+
+function addText(name, text) {
+  let cont = document.createElement("div")
+  cont.classList.add("stat")
+  let label = document.createElement("p")
+  label.textContent = name
+  cont.append(label)
+  let textElem = document.createElement("p")
+  console.log(name, text)
+  textElem.textContent = text
+  textElem.classList.add("description")
+  cont.append(textElem)
+  STATS.append(cont)
+}
+
+const BACKGROUND = document.getElementById("background")
+const SEARCH_BUTTON = document.getElementById("searchButton")
+const STATS = document.getElementById("stats")
 const albumTitle = document.getElementById("album-title")
 const songTitle = document.getElementById("song-title")
 const artistTitle = document.getElementById("artist-name")
@@ -214,23 +97,41 @@ const danceability = document.getElementById("danceability-stat")
 const energy = document.getElementById("energy-stat")
 const speechiness = document.getElementById("speechiness-stat")
 
+SEARCH_BUTTON.addEventListener("click", ()=>{
+  hideResultsAndShowSearch()
+})
+
 function populateUI(info, audioData) {
   albumArt.src = info.album.images[0].url
-  albumTitle.textContent = info.album.name
-  songTitle.textContent = info.name
-  artistTitle.textContent = info.artists.map(artist=>artist.name).join(", ")
-  danceability.style.width = audioData.danceability * 100 + "%"
-  energy.style.width = audioData.energy * 100 + "%"
-  speechiness.style.width = audioData.speechiness * 100 + "%"
-  handleColorQuantization()
+  albumArt.onload = () => {
+    const accent = handleColorQuantization()
+    albumTitle.textContent = info.album.name
+    songTitle.textContent = info.name
+    artistTitle.textContent = info.artists.map(artist=>artist.name).join(", ")
+    createStats(audioData, accent)
+    danceability.style.width = audioData.danceability * 100 + "%"
+    energy.style.width = audioData.energy * 100 + "%"
+    speechiness.style.width = audioData.speechiness * 100 + "%"
+    showSongInfo()
+  }
 }
 
-populateUI(pyreInfo, pyreAudioInfo)
+function showSongInfo() {
+  BACKGROUND.classList.remove("hidden")
+  document.getElementById("song-info").classList.remove("hidden")
+  SEARCH_BUTTON.classList.remove("hidden")
+}
 
 function handleColorQuantization() {
-  const thief = new ColorThief()
-  const palette = thief.getPalette(albumArt)
-  document.body.style.backgroundImage = palette.map(randomRadial).join(", ");
+  try {
+    let palette = THIEF.getPalette(albumArt)
+    palette = [...palette, ...palette, ...palette, ...palette, ...palette]
+    BACKGROUND.style.backgroundImage = palette.map(randomRadial).join(", ");
+    return THIEF.getColor(albumArt)
+  } catch (e) {
+    console.error(e)
+    return [255, 255, 255]
+  }
 }
 
 function randomRadial(color) {
@@ -239,4 +140,159 @@ function randomRadial(color) {
   return `radial-gradient(at ${x}% ${y}%, rgb(${color[0]}, ${color[1]}, ${color[2]}) 0, transparent 50%)`
 }
 
+function getSongInfo(id) {
+  return new Promise((resolve, reject)=>{
+    fetch("/song-info", {
+      method:"POST", 
+      body: JSON.stringify({id: id}),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res=>res.json())
+      .then(res=>resolve(res))
+  })
+}
+
+// getSongInfo("19blFYzqmPj7FtW7W4DFEl").then(data=>populateUI(data.info, data.stats))
+
+// populateUI(pyreInfo, pyreAudioInfo)
+
 // console.log(randomRadial([50, 50, 50]))
+
+// ===========
+// SEARCH CODE
+// ===========
+
+const searchCont = document.getElementById("search")
+const search = document.getElementById("searchResults")
+
+var lastQueryTime = 0
+var lastTimer = false
+var lastQuery = ""
+
+function getResults(query) {
+  return new Promise((resolve, reject)=>{
+    fetch("/search-tracks", {
+      method:"POST", 
+      body: JSON.stringify({query: query}),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res=>res.json())
+      .then(res=>resolve(res))
+  })
+}
+
+function createSearchResult(songImage, songTitle, songArtist, songId) {
+  const result = document.createElement("div");
+  result.classList.add("result");
+  const image = document.createElement("img");
+  image.setAttribute("src", songImage);
+  image.classList.add("image");
+  const info = document.createElement("div");
+  info.classList.add("info");
+  const title = document.createElement("p");
+  title.classList.add("title");
+  title.textContent = songTitle;
+  const artist = document.createElement("p");
+  artist.classList.add("artist");
+  artist.textContent = songArtist;
+  info.append(title, artist);
+  result.append(image, info);
+  result.addEventListener("click",()=>{
+    inspectSong(songId)
+  })
+  return result;
+}
+
+function hideSearch() {
+  searchCont.classList.add("hidden")
+}
+
+function hideResultsAndShowSearch() {
+  BACKGROUND.classList.add("hidden")
+  document.getElementById("song-info").classList.add("hidden")
+  SEARCH_BUTTON.classList.add("hidden")
+  setTimeout(()=>{
+    searchCont.classList.remove("hidden")
+  }, 1500)
+}
+
+function timerPromise(ms) {
+  return new Promise((res)=>{
+    setTimeout(()=>{
+      res()
+    }, ms)
+  })
+}
+
+function inspectSong(id) {
+  hideSearch()
+  Promise.all([
+    getSongInfo(id),
+    timerPromise(1000)
+  ])
+    .then(arr=>arr[0])
+    .then(data=>populateUI(data.info, data.stats))
+  //console.log(id)
+}
+
+
+const RATE_LIMIT = 900
+async function searchTrack(query) {
+  if (query == "") {
+    clearTracks()
+    lastQueryTime = Date.now()
+    return
+  }
+  if (query == lastQuery) {
+    lastQueryTime = Date.now()
+    return
+  }
+  const timeDelta = Date.now() - lastQueryTime
+  // console.log(timeDelta, query)
+  if (timeDelta > RATE_LIMIT) {
+    // console.log(query)
+    lastQuery = query
+    lastQueryTime = Date.now()
+    const results = await getResults(query)
+    displayTracks(results.tracks.items)
+  } else {
+    if (lastTimer) {
+      clearTimeout(lastTimer)
+    }
+    lastTimer = setTimeout(()=>{
+      searchTrack(query)
+    }, RATE_LIMIT - timeDelta)
+  }
+  
+}
+
+function displayTrack(track) {
+  const title = track.name
+  const artists = track.artists.map(artist=>artist.name).join(", ")
+  search.append(createSearchResult(track.album.images[track.album.images.length - 1].url, title, artists, track.id))
+}
+
+function clearTracks() {
+  while (search.children.length > 0) {
+    search.firstChild.remove()
+  }
+}
+
+function displayTracks(listOfTracks) {
+  tracks = listOfTracks.slice(0, 5);
+  clearTracks()
+  tracks.forEach(displayTrack);
+}
+
+const searchBox = document.getElementById("searchBox")
+searchBox.addEventListener("keyup", (e)=>{
+  searchTrack(searchBox.value.trim());
+})
+
+document.body.classList.add("transition")

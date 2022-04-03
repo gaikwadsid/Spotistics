@@ -53,6 +53,26 @@ function search(query) {
   })
 }
 
+function getSongInfo(id) {
+  return Promise.all([
+    fetch(`https://api.spotify.com/v1/audio-features/${encodeURIComponent(id)}`, {
+      method:"GET", 
+      headers:{
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + TOKEN
+      }
+    })
+    .then(res=>res.json()),
+    fetch(`https://api.spotify.com/v1/tracks/${encodeURIComponent(id)}`, {
+      method:"GET", 
+      headers:{
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + TOKEN
+      }
+    })
+    .then(res=>res.json())])
+}
+
 
 
 async function getSpotifyToken(id, secret) {
@@ -84,6 +104,19 @@ app.post("/search-tracks", (req, res)=>{
   } else {
     search("")
       .then(data=>res.json(data)) 
+  }
+})
+
+app.post("/song-info", (req, res)=>{
+  console.log(req.body)
+  if (req.body && req.body.id) {
+    getSongInfo(req.body.id)
+      .then((array)=>{
+        return {info:array[1], stats:array[0]}
+      })
+      .then(data=>res.json(data))
+  } else {
+    res.sendStatus(400)
   }
 })
 

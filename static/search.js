@@ -7,8 +7,6 @@ var lastQueryTime = 0
 var lastTimer = false
 var lastQuery = ""
 
-
-
 function getResults(query) {
   return new Promise((resolve, reject)=>{
     fetch("/search-tracks", {

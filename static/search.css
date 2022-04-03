@@ -3,7 +3,7 @@ body {
   justify-content: center;
   font-family: "Inter", sans-serif;
 }
-input {
+#searchBox {
   background: #999;
   color: white;
   border: none;
@@ -14,9 +14,8 @@ input {
   margin-top: 15vh;
 }
 
-input::placeholder {
+#searchBox::placeholder {
   color: #ddd;
-
 }
 
 .result {
