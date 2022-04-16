@@ -38,7 +38,7 @@ async function refreshToken() {
 }
 
 function search(query) {
-  console.log(TOKEN)
+  // console.log(TOKEN)
   return fetch(`https://api.spotify.com/v1/search/?q=${encodeURIComponent(query)}&type=track`, {
   method:"GET", 
   headers:{
@@ -48,7 +48,7 @@ function search(query) {
   })
   .then(res=>res.json())
   .then(res=>{
-    console.log(res)
+    // console.log(res)
     return res
   })
 }
@@ -93,7 +93,7 @@ async function getSpotifyToken(id, secret) {
 // }
 
 app.post("/search-tracks", (req, res)=>{
-  console.log(req.body)
+  // console.log(req.body)
   if (req.body && req.body.query) {
     search(req.body.query)
       .then(data=>res.json(data)) 
@@ -104,7 +104,7 @@ app.post("/search-tracks", (req, res)=>{
 })
 
 app.post("/song-info", (req, res)=>{
-  console.log(req.body)
+  // console.log(req.body)
   if (req.body && req.body.id) {
     getSongInfo(req.body.id)
       .then((array)=>{
